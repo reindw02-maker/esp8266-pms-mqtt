@@ -17,6 +17,8 @@ HW-628 ESP8266 空氣品質物聯網專案，整合 PMS5003、Wi-Fi 與 MQTT。
 - Topic：`jean/AQI`
 - 傳送週期：10 秒
 
+公開版本的程式將 Wi-Fi 密碼設為 `YOUR_WIFI_PASSWORD`，燒錄前請在本機程式中填入實際密碼。
+
 若 PMS5003 無法收到有效封包，`03_mqtt_pms` 會傳送：
 
 ```json

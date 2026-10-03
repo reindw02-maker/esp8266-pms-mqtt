@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESP8266 PMS MQTT 空氣品質物聯網專案</title>
+  <style>
+    :root{--blue:#1f4e78;--teal:#0f8f92;--ink:#183042;--bg:#f4f7fa;--card:#fff}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Microsoft JhengHei",sans-serif;line-height:1.7}
+    header{background:linear-gradient(135deg,#1f4e78,#0f8f92);color:#fff;padding:56px 20px 48px} main{max-width:1040px;margin:auto;padding:28px 20px 60px}
+    h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;margin:0 0 12px} h2{color:var(--blue);margin-top:36px} h3{color:var(--teal)}
+    .lead{font-size:1.15rem;max-width:760px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:22px 0}
+    .card{background:var(--card);border-radius:16px;padding:20px;box-shadow:0 5px 18px #15344d14}.card strong{display:block;color:var(--blue);font-size:1.1rem;margin-bottom:5px}
+    .diagram{width:100%;border-radius:12px;background:#fff;margin:12px 0 4px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.gallery img{width:100%;border-radius:12px;background:#fff}
+    a{color:#0969da;font-weight:600} code,pre{font-family:Consolas,monospace} pre{background:#14222d;color:#e8f3f8;padding:16px;border-radius:12px;overflow:auto}
+    .links{display:flex;flex-wrap:wrap;gap:12px}.links a{background:#e8f2f7;padding:8px 12px;border-radius:999px;text-decoration:none}
+    footer{max-width:1040px;margin:auto;padding:24px 20px 50px;color:#667}
+  </style>
+</head>
+<body>
+<header><main><h1>ESP8266 PMS MQTT</h1><p class="lead">HW-628 ESP8266 結合 PMS5003 空氣品質感測器，透過 Wi-Fi 與 MQTT 每 10 秒傳送 PM1.0、PM2.5、PM10 數據。</p></main></header>
+<main>
+  <section class="grid">
+    <div class="card"><strong>感測器</strong>PMS5003 UART 9600 baud</div>
+    <div class="card"><strong>控制器</strong>ESP8266 HW-628</div>
+    <div class="card"><strong>MQTT</strong>mqttgo.io:1883 / jean/AQI</div>
+    <div class="card"><strong>錯誤處理</strong>無有效封包時使用 -1</div>
+  </section>
+  <h2>系統架構</h2>
+  <img class="diagram" src="report_assets/system_architecture.png" alt="PMS5003 到 ESP8266、Wi-Fi、MQTT 與儀表板的系統架構圖">
+  <h2>資料流程</h2>
+  <img class="diagram" style="max-height:760px;object-fit:contain" src="report_assets/data_flow.png" alt="讀取 PMS5003、驗證封包、建立 JSON 並發布 MQTT 的流程圖">
+  <h2>JSON 格式</h2>
+  <pre>{"pm01": 5, "pm25": 8, "pm10": 15}</pre>
+  <p>若 PMS5003 無法收到有效資料，程式仍會發布：</p>
+  <pre>{"pm01": -1, "pm25": -1, "pm10": -1}</pre>
+  <h2>程式與文件</h2>
+  <div class="links">
+    <a href="01_LED/01_LED.ino">01 LED 測試</a><a href="02_mqtt/02_mqtt.ino">02 MQTT 模擬資料</a><a href="03_mqtt_pms/03_mqtt_pms.ino">03 PMS MQTT</a><a href="1003%E5%AD%B8%E7%BF%92%E6%AD%B7%E7%A8%8B.docx">下載學習歷程 Word</a><a href="README.md">README</a>
+  </div>
+  <h2>實作成果</h2>
+  <div class="gallery"><img src="report_assets/pms_wiring_mqtt.png" alt="PMS5003 與 HW-628 實體接線及 MQTT 訊息"><img src="report_assets/dashboard_result.png" alt="儀表板顯示 PM 數據與實體成果"><img src="report_assets/mqtt_fixed_values.png" alt="MQTT 固定模擬數據傳輸畫面"></div>
+</main>
+<footer>ESP8266 PMS MQTT learning project · reindw02-maker</footer>
+</body>
+</html>

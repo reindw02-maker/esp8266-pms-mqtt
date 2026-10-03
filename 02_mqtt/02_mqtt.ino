@@ -4,7 +4,8 @@
 #include <PubSubClient.h>
 
 const char* WIFI_SSID = "PHMHSCS02";
-const char* WIFI_PASSWORD = "11011101";
+// 請在本機設定，不要將真實密碼提交到公開儲存庫。
+const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
 const char* MQTT_SERVER = "mqttgo.io";
 const uint16_t MQTT_PORT = 1883;
 const char* MQTT_TOPIC = "jean/AQI";
