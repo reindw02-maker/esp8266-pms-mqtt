@@ -1,0 +1,5 @@
+docx_check_*
+rendered_report
+build_report.js
+build_report.py
+~$*.docx
